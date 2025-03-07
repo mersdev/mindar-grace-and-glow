@@ -1,0 +1,177 @@
+<html>
+
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <script src="https://cdn.jsdelivr.net/gh/hiukim/mind-ar-js@1.1.4/dist/mindar-image.prod.js"></script>
+    <script src="https://aframe.io/releases/1.3.0/aframe.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/gh/hiukim/mind-ar-js@1.1.4/dist/mindar-image-aframe.prod.js"></script>
+    <!-- Add Google Fonts for League Spartan -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=League+Spartan:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <script>
+        AFRAME.registerComponent("product-controller", {
+            init: function () {
+                const target = document.getElementById("target");
+                const productInfo = document.getElementById("product-info");
+                const video = document.getElementById("product-video");
+                
+                // detect target found
+                target.addEventListener("targetFound", event => {
+                    console.log("target found");
+                    this.found = true;
+                    productInfo.style.display = "block";
+                    video.play();
+                });
+                // detect target lost
+                target.addEventListener("targetLost", event => {
+                    console.log("target lost");
+                    this.found = false;
+                    productInfo.style.display = "none";
+                    video.pause();
+                });
+                
+                // Add interaction for product details button
+                const detailsBtn = document.getElementById("details-btn");
+                detailsBtn.addEventListener("click", () => {
+                    if (this.found) {
+                        const details = document.getElementById("extended-details");
+                        details.style.display = details.style.display === "none" ? "block" : "none";
+                    }
+                });
+            }
+        })
+    </script>
+    <style>
+        body {
+            margin: 0;
+            background-color: #f8f4ea; /* Cream background matching the image */
+            font-family: 'League Spartan', sans-serif;
+        }
+        
+        #product-info {
+            position: fixed;
+            bottom: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+            background-color: rgba(248, 244, 234, 0.9); /* Cream background with transparency */
+            padding: 20px;
+            border-radius: 10px;
+            max-width: 80%;
+            display: none;
+            z-index: 999;
+            text-align: center;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+            border: 1px solid #333;
+        }
+        
+        #extended-details {
+            margin-top: 15px;
+            display: none;
+            font-weight: 400;
+            line-height: 1.4;
+        }
+        
+        .product-title {
+            font-weight: 700;
+            font-size: 18px;
+            margin-bottom: 10px;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+            color: #333;
+        }
+        
+        .product-description {
+            font-size: 14px;
+            margin-bottom: 15px;
+            font-weight: 500;
+            color: #333;
+        }
+        
+        button {
+            background-color: #333;
+            color: #f8f4ea;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 5px;
+            cursor: pointer;
+            font-family: 'League Spartan', sans-serif;
+            font-weight: 600;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+            transition: all 0.3s ease;
+        }
+        
+        button:hover {
+            background-color: #555;
+        }
+        
+        .header {
+            position: absolute;
+            top: 20px;
+            width: 100%;
+            text-align: center;
+            z-index: 999;
+            color: #333;
+            font-weight: 700;
+            letter-spacing: 2px;
+        }
+        
+        .brand-name {
+            font-size: 24px;
+            margin-bottom: 5px;
+            text-transform: uppercase;
+        }
+        
+        .store-text {
+            font-size: 14px;
+            font-weight: 500;
+            letter-spacing: 3px;
+            margin-bottom: 15px;
+            text-transform: uppercase;
+        }
+        
+        .scan-text {
+            font-size: 12px;
+            font-weight: 400;
+            opacity: 0.8;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="header">
+        <div class="brand-name">Grace and Glow</div>
+        <div class="store-text">Official Store</div>
+        <div class="scan-text">Scan the product to see details</div>
+    </div>
+    
+    <div id="product-info">
+        <div class="product-title">English Pear and Freesia</div>
+        <div class="product-description">Acne Solution Body Wash with AHA BHA PHA and Centella Asiatica</div>
+        <button id="details-btn">View Details</button>
+        <div id="extended-details">
+            <p>400 ML 13.53 FL OZ</p>
+            <p>This premium body wash combines the elegant scent of English Pear and Freesia with powerful acne-fighting ingredients. The formula includes AHA, BHA, and PHA exfoliants to clear pores, while Centella Asiatica soothes and repairs skin.</p>
+            <p>Perfect for daily use to maintain clear, healthy skin.</p>
+        </div>
+    </div>
+    
+    <a-scene
+        mindar-image="imageTargetSrc: targets.mind;"
+        color-space="sRGB" renderer="colorManagement: true" vr-mode-ui="enabled: false"
+        device-orientation-permission-ui="enabled: false" cursor="rayOrigin: mouse;"
+        raycaster="objects: .clickable">
+        <a-assets>
+            <video id="product-video" src="video.mp4" preload="auto" loop="true" muted="false" playsinline></video>
+        </a-assets>
+
+        <a-camera position="0 0 0" look-controls="enabled: false"></a-camera>
+        <a-entity id="target" mindar-image-target="targetIndex: 0">
+            <a-plane class="clickable" position="0 0 0" height="1.5" width="1" material="src: #product-video; opacity: 1;" product-controller>
+            </a-plane>
+        </a-entity>
+    </a-scene>
+</body>
+
+</html>
