@@ -1,56 +1,57 @@
-# MindAR Web AR Video Player
+# Grace and Glow AR Product Showcase
 
-A web-based Augmented Reality (AR) application that plays video content when a specific image target is detected. Built with MindAR and A-Frame.
+An augmented reality (AR) web application for Grace and Glow's product showcase, featuring interactive product demonstrations and seamless shopping integration.
 
 ## Features
 
-- Image tracking using MindAR
-- Video playback triggered by image recognition
-- Mobile-friendly interface
-- Simple play/pause controls
+- AR-powered video playback triggered by product recognition
+- Interactive product information display
+- Direct shopping integration with Shopee and official website
+- Mobile-responsive design with modern UI
+- Real-time AR tracking with smooth transitions
+
+## Technologies Used
+
+- [MindAR](https://github.com/hiukim/mind-ar-js) - Web AR library for image tracking
+- [A-Frame](https://aframe.io/) - Web VR framework
+- HTML5 Video for AR content playback
+- Modern CSS with Google Fonts (League Spartan)
+- Responsive design for mobile and desktop devices
 
 ## Prerequisites
 
-- A modern web browser with WebAR support
-- A webcam or mobile device camera
-- Local development server (for testing)
-
-## Setup
-
-1. Clone this repository:
-   ```bash
-   git clone [your-repository-url]
-   cd mindar-template
-   ```
-
-2. Serve the files using a local web server. You can use any of these methods:
-   - Python: `python -m http.server 8000`
-   - Node.js: `npx http-server`
-   - PHP: `php -S localhost:8000`
-
-3. Open your browser and navigate to `http://localhost:8000`
-
-## Usage
-
-1. Point your camera at the target image
-2. The video will automatically play when the target is detected
-3. Use the play button if the video appears black on mobile devices
-4. The video will pause when the target is lost from view
+- Modern web browser with WebAR support
+- Device camera access (mobile or webcam)
+- Internet connection for AR content streaming
 
 ## Project Structure
 
 ```
-├── index.html          # Main application file
-├── 520.mp4            # Video content
-├── 520.png            # Source image
-└── targets.mind       # Compiled target image data
+├── index.html          # Main application file with AR and UI components
+├── video.mp4           # Product demonstration video
+├── targets.mind        # Compiled target image data for AR tracking
 ```
 
-## Technologies Used
+## Features in Detail
 
-- [MindAR](https://github.com/hiukim/mind-ar-js) - Web AR library
-- [A-Frame](https://aframe.io/) - Web VR framework
-- HTML5 Video
+### AR Video Playback
+- Automatic video playback when product is recognized
+- Smooth pause/resume transitions when tracking is lost/found
+
+### Product Information
+- Dynamic product details display
+- Product specifications and descriptions
+- Extended product information with elegant typography
+
+### Shopping Integration
+- Direct links to Shopee marketplace
+- Official website integration
+- Seamless shopping experience
+
+### User Interface
+- Clean, modern design with League Spartan typography
+- Responsive layout for all device sizes
+- Intuitive AR scanning instructions
 
 ## Contributing
 
