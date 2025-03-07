@@ -31,14 +31,7 @@
                     video.pause();
                 });
                 
-                // Add interaction for product details button
-                const detailsBtn = document.getElementById("details-btn");
-                detailsBtn.addEventListener("click", () => {
-                    if (this.found) {
-                        const details = document.getElementById("extended-details");
-                        details.style.display = details.style.display === "none" ? "block" : "none";
-                    }
-                });
+              
             }
         })
     </script>
@@ -50,14 +43,15 @@
         }
         
         #product-info {
-            position: fixed;
+            position: absolute;
             bottom: 20px;
             left: 50%;
             transform: translateX(-50%);
             background-color: rgba(248, 244, 234, 0.9); /* Cream background with transparency */
             padding: 20px;
             border-radius: 10px;
-            max-width: 80%;
+            max-width: 85%; /* Increased from 90% */
+            width: 450px; /* Added fixed width for larger display */
             display: none;
             z-index: 999;
             text-align: center;
@@ -136,6 +130,37 @@
             font-weight: 400;
             opacity: 0.8;
         }
+        
+        .button-group {
+            display: flex;
+            justify-content: space-between;
+            margin: 15px 0;
+            gap: 10px;
+        }
+        
+        .button-group button {
+            flex: 1;
+            padding: 10px 10px;
+            font-size: 15px;
+            white-space: nowrap;
+            min-width: 0;
+        }
+        
+        #shopee-btn {
+            background-color: #ee4d2d;
+        }
+        
+        #shopee-btn:hover {
+            background-color: #f26950;
+        }
+        
+        #official-btn {
+            background-color: #222;
+        }
+        
+        #official-btn:hover {
+            background-color: #444;
+        }
     </style>
 </head>
 
@@ -149,7 +174,10 @@
     <div id="product-info">
         <div class="product-title">English Pear and Freesia</div>
         <div class="product-description">Acne Solution Body Wash with AHA BHA PHA and Centella Asiatica</div>
-        <button id="details-btn">View Details</button>
+        <div class="button-group">
+            <button id="shopee-btn" onclick="window.open('https://shopee.com.my/graceandglow.my?entryPoint=ShopBySearch&searchKeyword=grace%20and%20glow', '_blank')">Shop on Shopee</button>
+            <button id="official-btn" onclick="window.open('https://www.gracenglow.me/', '_blank')">Official Website</button>
+        </div>
         <div id="extended-details">
             <p>400 ML 13.53 FL OZ</p>
             <p>This premium body wash combines the elegant scent of English Pear and Freesia with powerful acne-fighting ingredients. The formula includes AHA, BHA, and PHA exfoliants to clear pores, while Centella Asiatica soothes and repairs skin.</p>
